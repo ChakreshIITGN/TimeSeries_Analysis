@@ -1,0 +1,10 @@
+pandas 
+numpy 
+seaborn
+matplotlib
+scikit-learn
+statsmodels
+prophet
+tqdm
+pylint
+pytest
