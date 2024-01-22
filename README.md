@@ -10,5 +10,5 @@ The notebook is structured as follows : -
 
 ### Contents
 1. Introduction to the data
-2. 
+2. Exploration and Initial visualisation 
 
