@@ -140,12 +140,42 @@ with tab2:
     # st.header()
         
     st.subheader('Exponential Smoothing - (Done on the rolling average series)')
-    st.markdown("""
-            Single Exponential Smoothing 
+    st.markdown(r"""
                 
-            Double Exponential Smoothing 
+            Using `statsmodels.tsa.api` to generate different exponential smoothing. 
                 
-            Triple Exploential Smoothing
+            Single Exponential Smoothing - Trend - ❌, Seasonality - ❌
+                
+            $$
+                s_t = \alpha x_t + (1 - \alpha) s_{t-1} \\
+                0 \leq \alpha \leq 1
+            $$
+
+            Double Exponential Smoothing - Trend - ✅, Seasonality - ❌
+            
+            $$
+                s_t = \alpha x_t + (1 - \alpha) (s_{t-1} + b_{t-1}) \\
+                b_t = \beta (s_t - s_{t-1}) + (1 - \beta) b_{t-1} \\ 
+
+                0 \leq \alpha,\beta \leq 1
+            $$
+
+            :orange[$\alpha$] : Data Smoothing Factor
+            :orange[$\beta$] : Trend Smoothing Factor
+                
+            Triple Exploential Smoothing - Trend - ✅, Seasonality - ✅
+                
+            $$
+                s_0 = x_0 \\
+                s_t = \alpha \frac{x_t}{c_t - L} + (1 - \alpha) (s_{t-1} + b_{t-1}) \\
+                b_t = \beta (s_t - s_{t-1}) + (1 - \beta) b_{t-1} \\ 
+                c_t = \gamma \frac{x_t}{s_t} + (1 - \gamma) c_{t-L} \\
+                
+                0 \leq \alpha, \beta, \gamma \leq 1
+            $$
+                
+            :orange[$\gamma$] : Seasonal change smoothing factor, :orange[$\alpha, \beta$] same as above
+            
     """)
 
 
