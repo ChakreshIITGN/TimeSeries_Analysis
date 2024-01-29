@@ -38,13 +38,25 @@ with st.sidebar:
     st.write(" :violet[Running on Streamlit version] -- " + st.__version__)
 
 
-    dates = st.date_input(label=':orange[Enter the date range for the analysis]',
-                          value = (datetime.date(2019,1,1), datetime.date(2024,1,10)),
-                          min_value=datetime.date(2018,1,1), 
-                          max_value=datetime.date(2024,1,10),
-                          format="YYYY-MM-DD")
+    # dates = st.date_input(label=':orange[Enter the date range for the analysis]',
+    #                       value = (datetime.date(2019,1,1), datetime.date(2024,1,10)),
+    #                       min_value=, 
+    #                       max_value=datetime.date(2024,1,10),
+    #                       format="YYYY-MM-DD")
     
-    minDate,maxDate = str(dates[0]), str(dates[1])
+    minDate = st.date_input(label='Enter :orange[minimum] date for analysis', value=datetime.date(2019,1,1),
+                             min_value=datetime.date(2018,1,1),
+                             max_value=datetime.date(2023,1,1),format="YYYY-MM-DD")
+    
+    maxDate = st.date_input(label='Enter :orange[maximum] date for analysis', value=datetime.date(2024,1,10),
+                             min_value=datetime.date(2022,1,1),
+                             max_value=datetime.date(2024,1,10))
+    
+    if minDate > maxDate:
+
+        st.warning('Minimum Date should be earlier than maximum Date')
+    
+    # minDate,maxDate = str(dates[0]), str(dates[1])
     logData = st.radio(':orange[Logged Values]', options = [True, False],index=None)
     company = st.radio(':orange[Chose the company to analyse]', options=companyNames)
     window_size = st.slider(':orange[Chose the rolling window size]',min_value=5,max_value=50,value=28)
