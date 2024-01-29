@@ -15,13 +15,19 @@ st.title(':orange[Time Series Analysis]')
 
 ######### About the app ###############
 markdown_about_msg = """
-        ##### The app implements the basics of time series analysis.
+        
+        ## Introduction
+
+        The app implements the fundamental steps in time series analysis and forecasting. 
+        It lets you play around with key paramters and visualise their effect in the statistics and prediction. Currently the app
+        is using a model data set (source below)
 
         Data source :  KAGGLE : [link](https://www.kaggle.com/datasets/nikhil1e9/netflix-stock-price) to the data set 
-
-        :blue[KeyWords] :  **Time Series Analysis, ARMA, SeriesDecomposition, RNN, LSTM, Forecasting**
-
         Companies used in the dataset MAANG = Meta, Apple, Amazon, Netflix and, Google
+
+        
+        :blue[KeyWords] :  **Time Series Analysis, ARMA, SeriesDecomposition, Forecasting**
+
     """
 
 
