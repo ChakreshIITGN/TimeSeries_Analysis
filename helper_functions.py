@@ -1,11 +1,10 @@
+from prophet import Prophet
 from statsmodels.tsa.stattools import kpss
 from statsmodels.tsa.api import SimpleExpSmoothing, Holt, ExponentialSmoothing
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf, month_plot
-from prophet import Prophet
 
 import matplotlib.pyplot as plt
 
-import statsmodels as sm 
 import pandas as pd 
 import datetime
 import numpy as np
@@ -313,4 +312,25 @@ def prophet_prediction (train,company):
     st.pyplot(fig5)
 
     return None
+
+def autoregression_plots(data, lags):
+
+    """
+        This uses the statsmodels pacf and acf plots functions to create the 
+        Autoregression plots for the selected companies time series data
+
+        =====================================
+        arguments:
+
+        lags : number of lags steps to be considered for the ACF and PACF plots
+    """
+
+    fig6, (ax1,ax2) = plt.subplots(2,1,figsize=(10,8))
+    plot_acf(data,lags=lags,ax=ax1)
+    plot_pacf(data,lags=lags,ax = ax2)
+
+    st.pyplot(fig6)
+
+    return None
+    
 

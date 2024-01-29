@@ -1,15 +1,9 @@
 from helper_functions import *
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf, month_plot
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA as arima_model
-from statsmodels.tsa.stattools import kpss
 
 
-import time
 import streamlit as st 
-import numpy as np 
-import statsmodels as sm 
-import pandas as pd 
 import datetime
 
 ######### initial setup 
@@ -50,6 +44,11 @@ with st.sidebar:
     window_size = st.slider(':orange[Chose the rolling window size]',min_value=5,max_value=50,value=28)
     monthly_plot = st.button('Show Monthly Plot')
 
+
+    st.subheader('Lags for ACF and PACF plots')
+
+    lags = st.slider("Set the Lag", min_value=5,max_value=100,value=50)
+
     ts_decompose_model = st.radio('# :orange[Choose Decomposition Model]', options=['additive', 'multiplicative'])
 
     split_at = st.number_input(':orange[Split data into Train-Test starting from the end]', 
@@ -63,8 +62,8 @@ with st.sidebar:
     
 
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["About", "Exploration", "ARIMA models",
-                                              "Prophet", "DeepLearning Models", "Load Your Data" , "Next Steps"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["About", "Exploration", "ARIMA models",
+                                              "Prophet", "DeepLearning Models", "Next Steps"])
 
 
 with tab1:
@@ -150,13 +149,20 @@ with tab2:
     training_Data,test_Data = timeSeriesData_rolling[:-split_at], timeSeriesData_rolling[-split_at:]
 
 
-
     gen_smooth = st.button('Generate Smoothing ')
 
     if gen_smooth:
         generate_smoothing(smoothing_type,ts_decompose_model,training_Data,test_Data,timeSeriesData_rolling,split_at)
 
+    
+    st.subheader('Autoregression Plots')
+
+    autoregression_plots(timeSeriesData_rolling,lags=lags)
+    
+    
+    
     st.divider()
+
 
 
 with tab3:
@@ -205,43 +211,33 @@ with tab4:
 
 with tab5:
 
-    st.header('Deep Learning')
+    # st.header('Deep Learning')
+
+    st.write("""
+        Coming soon .......... 
+
+""")
 
     st.divider()
 
 
 with tab6:
-
-    message = """
-                This is a work in progress. Soon you will be able to analyse your own time series data
-
-                I appreciate your patience - 🙏
-
-                """
-
-    st.markdown(message)
-    
-    upload_file  = st.file_uploader("load your data",)
-
-    # with st.sidebar():
-
-    #     st.write("tune parameters for your own data")
-
-with tab7:
     
     next_steps = """
 
         ### :red[what to expect in future versions]
 
-        1. `User defined` arcitecture for the RNN and LSTM models
-        
-        2. `SARIMA models`
-        
-        3. `Theoretical` explanantion for the parameters search in statistical models
-        
-        4. `Scraping` data from online 
+        1. `Load Data` option to use the app for analysing any time-series. 
 
-        5. Implementation of `quantum algorithms` in forecasting.  
+        2. `User defined` arcitecture for the RNN and LSTM models
+        
+        3. `SARIMA models`
+        
+        4. `Theoretical` explanantion for the parameters search in statistical models
+        
+        5. `Scraping` data from online 
+
+        6. Implementation of `quantum algorithms` in forecasting.  
     """
 
     st.markdown(next_steps)
