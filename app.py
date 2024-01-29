@@ -163,7 +163,11 @@ with tab2:
     
     st.subheader('Autoregression Plots')
 
-    autoregression_plots(timeSeriesData_rolling,lags=lags)
+    show_arplots = st.button("Show ACF and PACF plots")
+
+    if show_arplots:
+    
+        autoregression_plots(timeSeriesData_rolling,lags=lags)
     
     
     
